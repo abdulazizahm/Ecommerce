@@ -1,0 +1,125 @@
+﻿@model List<BL.ViewModels.ProductViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminPanel.cshtml";
+}
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success"> @TempData["success"]</div>
+}
+@if (TempData["failed"] != null)
+{
+    <div class="alert alert-danger"> @TempData["failed"]</div>
+}
+@if (TempData["successDelete"] != null)
+{
+    <div class="alert alert-danger"> @TempData["successDelete"]</div>
+}
+
+
+<!-- Navbar -->
+<!-- End Navbar -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Simple Table</h4>
+                        <p class="card-category"> Here is a subtitle for this table</p>
+                        <button style="float:right" class="btn btn-success"> @Html.ActionLink("Add New Product", "CreateProduct")</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Photo
+                                </th>
+                                <th>
+                                    Description
+                                </th>
+                                <th>
+                                    Price
+                                </th>
+                                <th>
+                                    Quantity
+                                </th>
+                                <th>
+                                    Offer_Price
+                                </th>
+                                <th>
+                                    Vendor_User_id
+                                </th>
+                                <th>
+                                    Sub_Cat_Id
+                                </th>
+                                <th>
+                                    Brand_Id
+                                </th>
+                                <th>
+                                    <i class="material-icons">Edit</i>
+                                </th>
+                                <th>
+                                    <i class="material-icons">Delete</i>
+                                </th>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @product.Name
+                                            </td>
+                                            <td>
+                                                @product.Photo
+                                            </td>
+                                            <td>
+                                                @product.Desc
+                                            </td>
+                                            <td>
+                                                @product.Price
+                                            </td>
+                                            <td>
+                                                @product.Quantity
+                                            </td>
+
+                                            <td class="text-primary">
+                                                @product.Offer_Price
+                                            </td>
+                                            <td>
+                                                @product.Vendor_Name
+                                            </td>
+                                            <td>
+                                                @product.Sub_Category.Name
+                                            </td>
+                                            <td>
+                                                @product.Brand.Name
+                                            </td>
+                                            <td>
+                                                <a href="/Product/UpdateProduct/@product.Id">Edit</a>
+                                            </td>
+                                            <td>
+                                                <a href="/Product/DeleteProduct/@product.Id">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

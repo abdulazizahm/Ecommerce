@@ -1,0 +1,392 @@
+﻿@model BL.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "details";
+    Layout = "~/Views/Shared/_MainSiteLayoutView.cshtml";
+}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="~/Content/Imgs/Products/@Model.Photo" alt="">
+                    </div>
+                </div>
+            </div>
+         
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+                    <div class="product-preview">
+                        <img src="~/Content/Imgs/Products/@Model.Photo" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">@Model.Name</h2>
+                    <div>
+                        <div class="product-rating">
+                            @for (int i = 1; i <= ViewBag.aveg; i++)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+                            @for (int j = 1; j <= 5 - ViewBag.aveg; j++)
+                            {
+
+                                <i class="fa fa-star-o"></i>
+                            }
+                        </div>
+                        <a class="review-link" href="#">@ViewBag.count Review(s) | Add your review</a>
+                    </div>
+                    <div>
+                        <h3 class="product-price">$@Model.Offer_Price <del class="product-old-price">$@Model.Price</del></h3>
+                        <span class="product-available">In Stock</span>
+                    </div>
+                    <p>
+                        @Model.Desc
+                    </p>
+
+                    <div class="product-options">
+                        <div class="qty-label">
+                            Vendor Name :
+                            <span style="color:blue">@Model.Vendor_Name</span> | 
+                            Qty Avaiable Now :
+                            <span style="color:blue">@Model.Quantity</span>
+
+                        </div>
+                        <!--<label>
+                            Color
+                            <select class="input-select">
+                                <option value="0">Red</option>
+                            </select>
+                        </label>-->
+                    </div>
+
+                    <div class="add-to-cart">
+                        <div class="qty-label">
+                            Qty 
+                            <div class="input-number">
+                                <input type="number">
+                                <!--<span class="qty-up">+</span>
+                                <span class="qty-down">-</span>-->
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                    </div>
+
+                    <ul class="product-btns">
+                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                        <!--<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>-->
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Category:</li>
+                        <li><a href="#">Headphones</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /Product details -->
+            <!-- Product tab -->
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- product tab nav -->
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Details</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews (@ViewBag.count)</a></li>
+                    </ul>
+                    <!-- /product tab nav -->
+                    <!-- product tab content -->
+                    <div class="tab-content">
+                        <!-- tab1  -->
+                        <div id="tab1" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        @Model.Desc
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab1  -->
+                        <!-- tab2  -->
+                        <div id="tab2" class="tab-pane fade in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Vendor : @Model.Vendor_Name</p>
+                                    <p> Reviews for @Model.Name: (@ViewBag.count) Review(s)</p>
+                                    <p>Price : @Model.Price | Offer price : @Model.Offer_Price </p>
+                                    <p>Sell Count: @Model.Sell_Count</p>
+                                    <p>Product Rate According to Customers : @ViewBag.pres</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab2  -->
+                        <!-- tab3  -->
+                        <div id="tab3" class="tab-pane fade in">
+                            <div class="row">
+                                <!-- Rating -->
+                                <div class="col-md-3">
+                                    <div id="rating">
+                                        <div class="rating-avg">
+                                            <span>@ViewBag.aveg</span>
+                                            <div class="rating-stars">
+                                                @for (int i = 1; i <= ViewBag.aveg; i++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                @for (int j = 1; j <= 5 - ViewBag.aveg ; j++)
+                                                {
+
+                                                        <i class="fa fa-star-o"></i>
+                                                }
+                                                </div>
+                                        </div>
+                                        <ul class="rating">
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: @ViewBag.rat5pres%;"></div>
+                                                </div>
+                                                <span class="sum">@ViewBag.rat5</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: @ViewBag.rat4pres%;"></div>
+                                                </div>
+                                                <span class="sum">@ViewBag.rat4</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: @ViewBag.rat3pres%;"></div>
+                                                </div>
+                                                <span class="sum">@ViewBag.rat3</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: @ViewBag.rat2pres%;"></div>
+                                                </div>
+                                                <span class="sum">@ViewBag.rat2</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: @ViewBag.rat1pres%;"></div>
+                                                </div>
+                                                <span class="sum">@ViewBag.rat1</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Rating -->
+                                <!-- Reviews -->
+                                <div class="col-md-6">
+                                    <div id="reviews">
+                                        <ul class="reviews">
+                                            @foreach (var rating in ViewBag.RatingProd)
+                                            {<li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">@rating.User.UserName</h5>
+                                                    <p class="date">@rating.Created_at</p>
+                                                    <div class="review-rating">
+
+                                                        @for (int i = 1; i <= rating.Rate; i++)
+                                                        {
+                                                            <i class="fa fa-star"></i>
+                                                        }
+                                                        @for (int j = 1; j <= 5 - rating.Rate; j++)
+                                                        {
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        }
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p width="15%">@rating.Comment</p>
+                                                </div>
+                                            </li>
+                                            }
+                                           
+                                        </ul>
+                                        <!--<ul class="reviews-pagination">
+                                            <li class="active">1</li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        </ul>-->
+                                    </div>
+                                </div>
+                                <!-- /Reviews -->
+                                <!-- Review Form -->
+                                <div class="col-md-3">
+                                    <div id="review-form">
+                                        <form class="review-form" method="post" action="/uproduct/AddRate">
+                                            <input type="hidden" name="Product_Id"value="@Model.Id">
+                                            <input class="input" type="text" placeholder="Your Name">
+                                            <input class="input" type="email" placeholder="Your Email">
+                                            <textarea class="input" name="Comment" placeholder="Your Review"></textarea>
+                                            <div class="input-rating">
+                                                <span>Your Rating: </span>
+                                                <div class="stars">
+                                                    <input id="star5" name="Rate" value="5" type="radio"><label for="star5"></label>
+                                                    <input id="star4" name="Rate" value="4" type="radio"><label for="star4"></label>
+                                                    <input id="star3" name="Rate" value="3" type="radio"><label for="star3"></label>
+                                                    <input id="star2" name="Rate" value="2" type="radio"><label for="star2"></label>
+                                                    <input id="star1" name="Rate" value="1" type="radio"><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                            <button class="primary-btn">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /Review Form -->
+                            </div>
+                        </div>
+                        <!-- /tab3  -->
+                    </div>
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- Section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Related Products</h3>
+                </div>
+            </div>
+
+            <!-- product -->
+            @foreach (var product in ViewBag.products)
+            {
+                <div class="col-md-3 col-xs-6">
+                    <div class="product">
+                        <div class="product-img">
+                            <img src="~/Content/Imgs/Products/@product.Photo" alt="">
+                            <div class="product-label">
+                                <span class="sale">-30%</span>
+                            </div>
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">@product.Sub_Category.Name</p>
+                            <h3 class="product-name"><a href="#">@product.Name</a></h3>
+                            <h4 class="product-price">$@product.Offer_Price <del class="product-old-price">$@product.Price</del></h4>
+                            <div class="product-rating">
+                            </div>
+                            <div class="product-btns">
+                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                <a href="/uproduct/details/@product.Id" class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp" title="quick view"></span></a>
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        </div>
+                    </div>
+                </div>
+                }
+        
+
+            </div>
+        </div>
+
+    <!-- /container -->
+</div>
+<!-- /Section -->
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->

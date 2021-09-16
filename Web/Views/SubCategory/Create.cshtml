@@ -1,0 +1,64 @@
+﻿@model DAL.Model.Sub_Category
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_adminPanel.cshtml";
+    SelectList selectitem = new SelectList(ViewBag.Parent, "Id", "Name");
+    SelectList selectitem2 = new SelectList(ViewBag.Main, "Id", "Name"); 
+}
+<h2>Create</h2>
+<div class="col-8">
+@using (Html.BeginForm("Create", "SubCategory", FormMethod.Post, new{ enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Sub_Category</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Parent_Id, htmlAttributes: new { @class = "control-label col-md-2" })<br>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Parent_Id, selectitem.Append(new SelectListItem {Text= "Basic Sub Category",Value="0",Selected=true }),
+                     new { style = "font-size:1.2em;width:100%" })
+                @Html.ValidationMessageFor(model => model.Parent_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cat_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Cat_Id, selectitem2,new { style = "font-size:1.2em;width:100%" })
+                @Html.ValidationMessageFor(model => model.Cat_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label for="file">
+                    Image :
+                    <input type="file" id="file" name="file" style="opacity:1;position:relative">
+                </label>
+            </div>
+        </div><br><br><br>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

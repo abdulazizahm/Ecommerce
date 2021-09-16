@@ -1,0 +1,34 @@
+﻿@model BL.ViewModels.BrandViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_adminPanel.cshtml";
+}
+<div>
+    <br />
+    <h4>Details of brand @Model.Name</h4>
+    <hr />
+    
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <h4 style="color:darkblue;font-weight:bold;opacity:0.8">Brand photo</h4>
+               
+                <br>
+                <img src="~/Content/Imgs/Brands/@Model.Photo" width="200" height="200" alt="No image for this brand" />
+
+
+
+
+            </dl>
+        </div>
+    
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

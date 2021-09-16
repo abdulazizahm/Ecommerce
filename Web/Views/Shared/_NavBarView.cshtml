@@ -1,0 +1,154 @@
+﻿@model  List<DAL.Model.Sub_Category>
+@using BL.Hlper
+@{
+    helper help = new helper();
+}
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="header-links pull-left">
+                    <li><a href="#"><i class="fa fa-envelope-o"></i> @User.Identity.Name</a></li>
+                </ul>
+                <ul class="header-links pull-right">
+                    <li><a href="/Account/Logout">Logout</a></li>
+                </ul>
+            }
+            else
+            {
+                <ul class="header-links pull-left">
+                    <li><a href="/account/login">Login</a></li>
+                </ul>
+                <ul class="header-links pull-right">
+                    <li><a href="/account/register">Register</a></li>
+                </ul>
+            }
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="#" class="logo">
+                            <img src="./img/logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form action="/MainSite/Search" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <select class="input-select" name="SubCatId">
+                                <option value="0">All Categories</option>
+                                @foreach (var cat in Model)
+                                {
+                                    <option value=@cat.Id>@cat.Name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessage("SubCatId")
+                            <input class="input" placeholder="Search here" name="SearchText" required>
+                            @Html.ValidationMessage("SearchText")
+                            <button type="submit" class="search-btn">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        <!-- Wishlist -->
+                        <div>
+                            <a href="#">
+                                <i class="fa fa-heart-o"></i>
+                                <span>Your Wishlist</span>
+                                <div class="qty">2</div>
+                            </a>
+                        </div>
+                        <!-- /Wishlist -->
+                        <!-- Cart -->
+                        <div class="dropdown">
+                            <a href="/Cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Your Cart</span>
+                                @* Number of products added to the cart *@
+                                @if (@ViewBag.cartCount == null || @ViewBag.cartCount == 0)
+                                {
+                                    <div id="cartBadge"></div>
+                                }
+                                else
+                                {
+                                    <div class="qty" id="cartBadge">@ViewBag.cartCount</div>
+                                }
+                            </a>
+                        </div>
+                        <!-- /Cart -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+
+
+                @foreach (var firstChild in Model)
+                {
+                    <li class="dropdown">
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">@firstChild.Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach (var sub in help.showTree(firstChild.Id))
+                            {
+                                <li>
+
+                                    @Html.ActionLink(sub.Name, "ShowProductByCategory", new { sub_cat_id = sub.Id })
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+
+
+
+
+
+
+
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>

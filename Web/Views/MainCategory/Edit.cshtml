@@ -1,0 +1,61 @@
+﻿@model DAL.Model.Main_Category
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_adminPanel.cshtml";
+}
+<br />
+<h2>Edit @Model.Name</h2>
+
+<div class="row">
+    <div class="col-8">
+        @using (Html.BeginForm("Edit", "MainCategory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        <label for="imageFile">
+                            main_category Image:
+                            <br /> <input type="file" name="imageFile" id="imageFile" style="opacity:1;position:relative" />
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+    <div class="col-4">
+        <h4 style="color:darkblue;font-weight:bold;opacity:0.8">main_category photo</h4><br><br>
+        <img src="~/Content/Imgs/Main_Categories/@Model.Photo" width="200" height="200" alt="No image for this main_Category" />
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

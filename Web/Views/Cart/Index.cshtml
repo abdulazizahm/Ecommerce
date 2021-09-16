@@ -1,0 +1,162 @@
+﻿@model IEnumerable<BL.ViewModels.Item>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainSiteLayoutView.cshtml";
+
+}
+
+
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Cart</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/mainsite">Home</a></li>
+                    <li class="active">Cart</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-7">
+                <!-- Cart Details -->
+                @if (ViewBag.emptyCart == null)
+                {
+
+                    foreach (var product in Model)
+                    {
+
+                        <div class="row card" style="position: relative" id="@product.Product.Id">
+                            <button class="btn btn-danger cart-close-btn" onclick="deleteFromCard(@product.Product.Id)">X</button>
+                            <!-- Product thumb imgs -->
+                            <div class="col-xs-4">
+                                <img src="~/Content/Imgs/Products/@product.Product.Photo" style="width:100%" alt="">
+                            </div>
+                            <!-- /Product thumb imgs -->
+                            <!-- Product details -->
+                            <div class="col-xs-8" style="margin-top: 5rem;">
+                                <div class="product-details">
+                                    <h2 class="product-name">@product.Product.Name</h2>
+                                    <div>
+                                        <h3 class="product-price">@product.Product.Offer_Price <del class="product-old-price">@product.Product.Price</del></h3>
+                                    </div>
+                                    <p>@product.Product.Desc</p>
+                                </div>
+
+                            </div>
+                            <!-- /Product details -->
+                        </div>
+                    }
+                }
+                else
+                {
+                    <h3 class="title">Your Cart is empty add more products now!</h3>
+                }
+
+                <!-- cart Details end-->
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Your Order</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>PRODUCT</strong></div>
+                        <div><strong>Price</strong></div>
+                    </div>
+                    <div class="order-products">
+                        @if (ViewBag.emptyCart == null)
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <div class="order-col" id="bill_@item.Product.Id">
+                                    <div><span>@item.Quantity</span>x @item.Product.Name</div>
+                                    <div>$@item.Product.Offer_Price</div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    <div class="order-col">
+                        <div>Shiping</div>
+                        <div><strong>FREE</strong></div>
+                    </div>
+                    <div class="order-col">
+                        <div><strong>TOTAL</strong></div>
+                        <div><strong class="order-total" id="order-total">@ViewBag.total</strong></div>
+                    </div>
+                </div>
+                <div class="payment-method">
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-1">
+                        <label for="payment-1">
+                            <span></span>
+                            Direct Bank Transfer
+                        </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-2">
+                        <label for="payment-2">
+                            <span></span>
+                            Cheque Payment
+                        </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-3">
+                        <label for="payment-3">
+                            <span></span>
+                            Paypal System
+                        </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">
+                        <span></span>
+                        I've read and accept the <a href="#">terms & conditions</a>
+                    </label>
+                </div>
+                @if (ViewBag.emptyCart == null)
+                {
+                    <a href="/Checkout" class="primary-btn order-submit" id="order-submit">Place order</a>
+                }
+                else
+                {
+                    <a href="/Checkout" class="primary-btn order-submit disabled" id="order-submit">Place order</a>
+                }
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

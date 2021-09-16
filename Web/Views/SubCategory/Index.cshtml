@@ -1,0 +1,68 @@
+﻿@using DAL.Model;
+@model IEnumerable<DAL.Model.Sub_Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminPanel.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Category", "Create",null,new {@class="btn btn-primary" })
+</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Simple Table</h4>
+                    <p class="card-category"> Here is a subtitle for this table</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                               Main Category
+                            </th>
+                            <th>
+                                Sub Category
+                            </th>
+                            <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                 <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Main_Category.Name)
+                                </td>
+                                <td>
+                                    
+                                    @Html.DisplayFor(modelItem => item.Parent.Name)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+      
+
+  

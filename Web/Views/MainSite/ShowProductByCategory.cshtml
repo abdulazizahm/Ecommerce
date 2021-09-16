@@ -1,0 +1,77 @@
+﻿@model  List<BL.ViewModels.ProductViewModel>
+@{
+    ViewBag.Title = "ShowProductByCategory";
+    Layout = "~/Views/Shared/_MainSiteLayoutView.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+        <div class="col-md-4 col-sm-6">
+            <div class="product">
+                <div class="product-img">
+                    <img src="~/Content/Imgs/Products/@product.Photo" alt="this is photo">
+                    <div class="product-label">
+                        <span class="sale">-30%</span>
+                        <span class="new">NEW</span>
+                    </div>
+                </div>
+                <div class="product-body">
+                    <p class="product-category">@product.Brand.Name</p>
+                    <h3 class="product-name"><a href="#">@product.Name</a></h3>
+                    @if (product.Offer_Price != 0)
+                    {
+                        <h4 class="product-price">$ @product.Offer_Price <del class="product-old-price">$ @product.Price</del></h4>
+                    }
+                    else
+                    {
+                        <h4 class="product-price">$ @product.Price </h4>
+                    }
+
+                    <div class="product-rating">
+
+                        @{
+                            int sum = 0;
+                            int avarage = 0;
+
+                        }
+                        @for (int i = 0; i < product.Ratings.Count(); i++)
+                        {
+                            sum += product.Ratings[i].Rate;
+
+                        }
+                        @{
+                            if (sum != 0) { avarage = sum / product.Ratings.Count(); }
+
+
+
+                        }
+                        @for (int i = 0; i < avarage; i++)
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+
+
+                    </div>
+                    <div class="product-btns">
+                        <input type="hidden" value="@product.Id" id="productID" />
+
+                        <button class="add-to-wishlist"><i class="fa fa-heart-o" id="btnSave"></i><span class="tooltipp">add to wishlist</span></button>
+
+                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                    </div>
+                </div>
+                <div class="add-to-cart">
+                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                </div>
+            </div>
+        </div>
+        }
+        </div>
+</div>
+     
+        
+        
+        

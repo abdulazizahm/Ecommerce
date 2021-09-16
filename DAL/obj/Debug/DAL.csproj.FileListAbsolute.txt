@@ -1,0 +1,10 @@
+E:\Ecommerce\DAL\bin\Debug\DAL.dll.config
+E:\Ecommerce\DAL\bin\Debug\DAL.dll
+E:\Ecommerce\DAL\bin\Debug\DAL.pdb
+E:\Ecommerce\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+E:\Ecommerce\DAL\obj\Debug\DAL.csproj.CopyComplete
+E:\Ecommerce\DAL\obj\Debug\DAL.dll
+E:\Ecommerce\DAL\obj\Debug\DAL.pdb
+E:\Ecommerce\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+E:\Ecommerce\DAL\obj\Debug\DAL.Migrations.databaseecommerce.resources
+E:\Ecommerce\DAL\obj\Debug\DAL.csproj.GenerateResource.cache
